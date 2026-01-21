@@ -31,3 +31,9 @@ There are no security or ethical concerns.
 
 ### Set up the environment
 The code was developed and tested using **MATLAB R2025b** with the **Optimization Toolbox**, **Symbolic Math Toolbox**, and **Statistics and Machine Learning Toolbox** installed. The toolboxes include the [**`linprog`**](https://www.mathworks.com/help/optim/ug/linprog.html) function for linear programming and the [**`randsample`**](https://www.mathworks.com/help/stats/randsample.html) function for random sample.
+
+## Artifact Evaluation
+### Main Results(displayed in Table 1) demo
+#### Utility loss across different perturbation methods(Case I: Frequency Estimation)
+It reports the utility loss of different perturbation methods under varying privacy budgets 𝜖. As expected, the utility loss consistently decreases as 𝜖 increases for all methods.
+Overall, DepHDP (our method) achieves the lowest utility loss across all privacy budgets, clearly outperforming approaches based on SPL (uniform budget allocation) and ALLOC (optimized budget allocation across attributes). 
