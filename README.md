@@ -26,3 +26,7 @@ There are no security or ethical concerns.
 - **Windows 10/11**
 - **macOS Monterey/Ventura**
 - **Ubuntu Linux 20.04/22.04**
+
+
+### Set up the environment
+The code was developed and tested using **MATLAB R2024b** with the **Optimization Toolbox**, **Symbolic Math Toolbox**, and **Statistics and Machine Learning Toolbox** installed. The toolboxes include the [**`linprog`**](https://www.mathworks.com/help/optim/ug/linprog.html) function for linear programming and the [**`randsample`**](https://www.mathworks.com/help/stats/randsample.html) function for random sample.
