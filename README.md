@@ -37,3 +37,38 @@ The code was developed and tested using **MATLAB R2025b** with the **Optimizatio
 #### Utility loss across different perturbation methods(Case I: Frequency Estimation)
 It reports the utility loss of different perturbation methods under varying privacy budgets 𝜖. As expected, the utility loss consistently decreases as 𝜖 increases for all methods.
 Overall, DepHDP (our method) achieves the lowest utility loss across all privacy budgets, clearly outperforming approaches based on SPL (uniform budget allocation) and ALLOC (optimized budget allocation across attributes). 
+
+### Experiments 
+The file **`main_fe.m`** is the driver script for the Frequency Estimation case. It orchestrates the entire experimental workflow by sequentially invoking all major modules, from data and budget preparation to perturbation, utility loss evaluation, and final result analysis, ensuring a complete and reproducible experiment.
+```matlab
+cost_attribute3;
+
+%%
+distance_all_attribute_sets;
+
+%%
+% sample_points;
+%% 
+loss_calculation2;
+
+%% 
+epsilon_allocation;
+
+%%
+real_loss_r;
+
+%%
+real_loss_m;
+
+%%
+BS_SPL;
+
+%%
+OPT_PND;
+
+%%
+OPT_RMP;
+
+%%
+analyze_result;
+```
