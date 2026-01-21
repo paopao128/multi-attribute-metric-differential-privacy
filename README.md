@@ -10,6 +10,9 @@ This repository contains the source code related to the methodologies and experi
 The file **`main_fe.m`** implements the **DepHDP-m** and **DepHDP-r** algorithm (*Dependency-aware Heterogeneous Data Perturbation*) proposed in the paper. DepHDP is a framework for multi-attribute mDP that combines dependency-aware grouping with heterogeneous perturbation design.
 
 ### Directory Structure
+* README.md
+* Frequency Estimation/
+
 
 ### Security/Privacy Issues and Ethical Concerns
 There are no security or ethical concerns.
