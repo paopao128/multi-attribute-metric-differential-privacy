@@ -39,7 +39,7 @@ It reports the utility loss of different perturbation methods under varying priv
 Overall, DepHDP (our method) achieves the lowest utility loss across all privacy budgets, clearly outperforming approaches based on SPL (uniform budget allocation) and ALLOC (optimized budget allocation across attributes). 
 
 ### Experiments 
-The file **`main_fe.m`** is the driver script for the Frequency Estimation case. It orchestrates the entire experimental workflow by sequentially invoking all major modules, from data and budget preparation to perturbation, utility loss evaluation, and final result analysis, ensuring a complete and reproducible experiment.
+The file **`main_fe.m`** is the driver script for the Frequency Estimation case. It contains the entire experimental workflow by sequentially invoking all major modules, from data and budget preparation to perturbation, utility loss evaluation, and final result analysis, ensuring a complete and reproducible experiment.
 ```matlab
 cost_attribute3;                  % calculate cost mattrix for all groups
 
