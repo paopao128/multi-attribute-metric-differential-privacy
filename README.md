@@ -41,33 +41,31 @@ Overall, DepHDP (our method) achieves the lowest utility loss across all privacy
 ### Experiments 
 The file **`main_fe.m`** is the driver script for the Frequency Estimation case. It orchestrates the entire experimental workflow by sequentially invoking all major modules, from data and budget preparation to perturbation, utility loss evaluation, and final result analysis, ensuring a complete and reproducible experiment.
 ```matlab
-cost_attribute3;
+cost_attribute3;                  % calculate cost mattrix for all groups
 
 %%
-distance_all_attribute_sets;
-
-%%
-% sample_points;
+distance_all_attribute_sets;      % calculate distance matrix for all groups
+               
 %% 
-loss_calculation2;
+loss_calculation2;                % this can be done as a pre-calculate result, it takes much time in this step
 
 %% 
-epsilon_allocation;
+epsilon_allocation;               % allocate different privacy budgets to different groups with an optimization method
 
 %%
-real_loss_r;
+real_loss_r;                      % calculate the utility loss for DepHDP-r with allocated privacy budget
 
 %%
-real_loss_m;
+real_loss_m;                      % calculate the utility loss for DepHDP-m with allocated privacy budget
 
 %%
-BS_SPL;
+BS_SPL;                           % calculate the utility loss for SPL+DPN and SPL+RMP with splitted privacy budget
 
 %%
-OPT_PND;
+OPT_PND;                          % calculate the utility loss for ALLOC+DPN with splitted privacy budget
 
 %%
-OPT_RMP;
+OPT_RMP;                          % calculate the utility loss for ALLOC+RMP with splitted privacy budget
 
 %%
 analyze_result;
