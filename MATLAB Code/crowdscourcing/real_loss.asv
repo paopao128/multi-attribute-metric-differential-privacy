@@ -1,0 +1,152 @@
+load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\epsilon_allocation_lower.mat")
+load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\epsilon_allocation_upper.mat")
+load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\distance_all_attributes.mat")
+load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\cost_attribute.mat")
+
+%% use epsilon_allocation upper
+loss_real=zeros(length(epsilon_allocation_upper),1);
+for epsilon_id=1:length(epsilon_allocation_upper)
+    epsilon_allocat=epsilon_allocation_upper(epsilon_id,:);
+    % method_obfus=[3,1,1,1]; threshold_adj=[1, 0.125, 0.15, 0.15];
+    %loss_set1=cal_loss_benders(epsilon_allocat(1),distance_all_attributes{1,1},cost_attribute{1,1},1);
+    % 1
+    epsilon=epsilon_allocat(1);
+    distance_matrix_original=distance_all_attributes{1,1};
+    cost=cost_attribute{1,1};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set1=loss_benchmarks;
+    % 2
+    epsilon=epsilon_allocat(2);
+    distance_matrix_original=distance_all_attributes{1,2};
+    cost=cost_attribute{1,2};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set2=loss_benchmarks;
+    % 3
+    epsilon=epsilon_allocat(3);
+    distance_matrix_original=distance_all_attributes{1,3};
+    cost=cost_attribute{1,3};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set3=loss_benchmarks;
+    % 4
+    epsilon=epsilon_allocat(4);
+    distance_matrix_original=distance_all_attributes{1,4};
+    cost=cost_attribute{1,4};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set4=loss_benchmarks;
+    loss_real(epsilon_id,1)=1.00859*loss_set1+0.991475*loss_set2+0.736224*loss_set3+1.00261*loss_set4+11.9124;
+end
+
+
+%% benchmark
+epsilon_benchmark=
+loss_benchmark=zeros(length(epsilon_allocation_upper),1);
+for epsilon_id=1:length(epsilon_allocation_upper)
+    epsilon_allocat=epsilon_allocation_upper(epsilon_id,:);
+    % method_obfus=[3,1,1,1]; threshold_adj=[1, 0.125, 0.15, 0.15];
+    %loss_set1=cal_loss_benders(epsilon_allocat(1),distance_all_attributes{1,1},cost_attribute{1,1},1);
+    % 1
+    epsilon=epsilon_allocat(1);
+    distance_matrix_original=distance_all_attributes{1,1};
+    cost=cost_attribute{1,1};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set1=loss_benchmarks;
+    % 2
+    epsilon=epsilon_allocat(2);
+    distance_matrix_original=distance_all_attributes{1,2};
+    cost=cost_attribute{1,2};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set2=loss_benchmarks;
+    % 3
+    epsilon=epsilon_allocat(3);
+    distance_matrix_original=distance_all_attributes{1,3};
+    cost=cost_attribute{1,3};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set3=loss_benchmarks;
+    % 4
+    epsilon=epsilon_allocat(4);
+    distance_matrix_original=distance_all_attributes{1,4};
+    cost=cost_attribute{1,4};
+    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    sum_i=zeros(length(distance_matrix_original),1);
+    for i=1:length(distance_matrix_original)
+        for j=1:length(distance_matrix_original)
+            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+        end
+        for j=1:length(distance_matrix_original)
+            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+        end
+    end
+    loss_benchmarks = sum(sum(cost .* P_matrix));
+    loss_set4=loss_benchmarks;
+    loss_real(epsilon_id,1)=1.00859*loss_set1+0.991475*loss_set2+0.736224*loss_set3+1.00261*loss_set4+11.9124;
+end
