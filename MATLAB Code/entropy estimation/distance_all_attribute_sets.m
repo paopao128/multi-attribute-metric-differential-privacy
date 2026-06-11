@@ -1,13 +1,11 @@
-load("result/result-t/cost_attribute.mat")
-load("result/result-t/X.mat")
+load("result/result-2/cost_attribute.mat")
+load("result/result-2/X.mat")
 data_ori=X;
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 data_norm = zscore(data_ori);
 
@@ -28,7 +26,7 @@ for id_attribute=1:length(attribute_set)
         distance_all_attributes{1,id_attribute}(i,:) = sqrt(sum(diffs.^2, 2))'; 
     end
 end
-save('result/result-t/distance_all_attributes.mat','distance_all_attributes');
+save('result/result-2/distance_all_attributes.mat','distance_all_attributes');
 
 
 

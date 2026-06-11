@@ -3,18 +3,16 @@
 % Similar structure to original sample_points.m but using entropy metrics
 
 %% Load data and baseline metrics
-load("result/result-t/X.mat");
-load("result/result-t/H_clean.mat");
-load("result/result-t/attribute_set.mat");
+load("result/result-1/X.mat");
+load("result/result-1/H_clean.mat");
+load("result/result-1/attribute_set.mat");
 
 % Define attribute sets (same as in get_cost_matrix2.m)
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 fprintf('Loaded data: %d × %d\n', size(X,1), size(X,2));
 fprintf('Baseline entropy metrics loaded.\n\n');
@@ -25,15 +23,15 @@ fprintf('Extracting unique value combinations...\n');
 [uniqueVals2, ~, value_idx2] = unique(X(:,attribute_set{1,2}), 'rows');
 [uniqueVals3, ~, value_idx3] = unique(X(:,attribute_set{1,3}), 'rows');
 [uniqueVals4, ~, value_idx4] = unique(X(:,attribute_set{1,4}), 'rows');
-[uniqueVals5, ~, value_idx5] = unique(X(:,attribute_set{1,5}), 'rows');
-[uniqueVals6, ~, value_idx6] = unique(X(:,attribute_set{1,6}), 'rows');
+% [uniqueVals5, ~, value_idx5] = unique(X(:,attribute_set{1,5}), 'rows');
+% [uniqueVals6, ~, value_idx6] = unique(X(:,attribute_set{1,6}), 'rows');
 
 fprintf('  Set 1: %d unique combinations\n', size(uniqueVals1,1));
 fprintf('  Set 2: %d unique combinations\n', size(uniqueVals2,1));
 fprintf('  Set 3: %d unique combinations\n', size(uniqueVals3,1));
 fprintf('  Set 4: %d unique combinations\n', size(uniqueVals4,1));
-fprintf('  Set 5: %d unique combinations\n', size(uniqueVals5,1));
-fprintf('  Set 6: %d unique combinations\n\n', size(uniqueVals6,1));
+% fprintf('  Set 5: %d unique combinations\n', size(uniqueVals5,1));
+% fprintf('  Set 6: %d unique combinations\n\n', size(uniqueVals6,1));
 
 %% Configuration
 num_sample = 1000;
@@ -44,8 +42,8 @@ loss_set1 = zeros(num_sample,1);
 loss_set2 = zeros(num_sample,1);
 loss_set3 = zeros(num_sample,1);
 loss_set4 = zeros(num_sample,1);
-loss_set5 = zeros(num_sample,1);
-loss_set6 = zeros(num_sample,1);
+% loss_set5 = zeros(num_sample,1);
+% loss_set6 = zeros(num_sample,1);
 loss_set_all = zeros(num_sample,1);
 
 fprintf('Starting random sampling (%d samples)...\n\n', num_sample);
@@ -124,90 +122,78 @@ for sample_id = 1:num_sample
         attribute_set{1,4}, all_attrs);
     loss_set4(sample_id,1)=loss_set4(sample_id,1)/count_obf;
 
-    % === SET 5 ===
-    X_temp = X;
-    obf_i_5 = randi(length(uniqueVals5));
-    obf_j_5 = randi(length(uniqueVals5));
-    count_obf=0;
-    for i = 1:size(X_temp,1)
-        if isequal(X_temp(i,attribute_set{1,5}), uniqueVals5(obf_i_5,:))
-            X_temp(i,attribute_set{1,5}) = uniqueVals5(obf_j_5,:);
-            count_obf=count_obf+1;
-        end
-    end
-    
-    H_obfuscated = calculate_entropy_metrics(X_temp, all_attrs);
-    loss_set5(sample_id,1) = calculate_entropy_cost(H_clean, H_obfuscated, ...
-        attribute_set{1,5}, all_attrs);
-    loss_set5(sample_id,1)=loss_set5(sample_id,1)/count_obf;
-
-    % === SET 6 ===
-    X_temp = X;
-    obf_i_6 = randi(length(uniqueVals6));
-    obf_j_6 = randi(length(uniqueVals6));
-    count_obf=0;
-    for i = 1:size(X_temp,1)
-        if isequal(X_temp(i,attribute_set{1,6}), uniqueVals6(obf_i_6,:))
-            X_temp(i,attribute_set{1,6}) = uniqueVals6(obf_j_6,:);
-            count_obf=count_obf+1;
-        end
-    end
-    
-    H_obfuscated = calculate_entropy_metrics(X_temp, all_attrs);
-    loss_set6(sample_id,1) = calculate_entropy_cost(H_clean, H_obfuscated, ...
-        attribute_set{1,6}, all_attrs);
-    loss_set6(sample_id,1)=loss_set6(sample_id,1)/count_obf;
+    % % === SET 5 ===
+    % X_temp = X;
+    % obf_i_5 = randi(length(uniqueVals5));
+    % obf_j_5 = randi(length(uniqueVals5));
+    % count_obf=0;
+    % for i = 1:size(X_temp,1)
+    %     if isequal(X_temp(i,attribute_set{1,5}), uniqueVals5(obf_i_5,:))
+    %         X_temp(i,attribute_set{1,5}) = uniqueVals5(obf_j_5,:);
+    %         count_obf=count_obf+1;
+    %     end
+    % end
+    % 
+    % H_obfuscated = calculate_entropy_metrics(X_temp, all_attrs);
+    % loss_set5(sample_id,1) = calculate_entropy_cost(H_clean, H_obfuscated, ...
+    %     attribute_set{1,5}, all_attrs);
+    % loss_set5(sample_id,1)=loss_set5(sample_id,1)/count_obf;
+    % 
+    % % === SET 6 ===
+    % X_temp = X;
+    % obf_i_6 = randi(length(uniqueVals6));
+    % obf_j_6 = randi(length(uniqueVals6));
+    % count_obf=0;
+    % for i = 1:size(X_temp,1)
+    %     if isequal(X_temp(i,attribute_set{1,6}), uniqueVals6(obf_i_6,:))
+    %         X_temp(i,attribute_set{1,6}) = uniqueVals6(obf_j_6,:);
+    %         count_obf=count_obf+1;
+    %     end
+    % end
+    % 
+    % H_obfuscated = calculate_entropy_metrics(X_temp, all_attrs);
+    % loss_set6(sample_id,1) = calculate_entropy_cost(H_clean, H_obfuscated, ...
+    %     attribute_set{1,6}, all_attrs);
+    % loss_set6(sample_id,1)=loss_set6(sample_id,1)/count_obf;
 
     % === ALL SETS COMBINED ===
+    % Track each set's count separately so normalization matches individual xi's
     X_temp = X;
-    count_obf=0;
-    % Apply all obfuscations using the same random indices from above
+    count1_comb = 0; count2_comb = 0; count3_comb = 0; count4_comb = 0;
     for i = 1:size(X_temp,1)
         if isequal(X_temp(i,attribute_set{1,1}), uniqueVals1(obf_i_1,:))
             X_temp(i,attribute_set{1,1}) = uniqueVals1(obf_j_1,:);
-            count_obf=count_obf+1;
+            count1_comb = count1_comb + 1;
         end
     end
-    
     for i = 1:size(X_temp,1)
         if isequal(X_temp(i,attribute_set{1,2}), uniqueVals2(obf_i_2,:))
             X_temp(i,attribute_set{1,2}) = uniqueVals2(obf_j_2,:);
-            count_obf=count_obf+1;
+            count2_comb = count2_comb + 1;
         end
     end
-    
     for i = 1:size(X_temp,1)
         if isequal(X_temp(i,attribute_set{1,3}), uniqueVals3(obf_i_3,:))
             X_temp(i,attribute_set{1,3}) = uniqueVals3(obf_j_3,:);
-            count_obf=count_obf+1;
+            count3_comb = count3_comb + 1;
         end
     end
-    
     for i = 1:size(X_temp,1)
         if isequal(X_temp(i,attribute_set{1,4}), uniqueVals4(obf_i_4,:))
             X_temp(i,attribute_set{1,4}) = uniqueVals4(obf_j_4,:);
-            count_obf=count_obf+1;
+            count4_comb = count4_comb + 1;
         end
     end
-    
-    for i = 1:size(X_temp,1)
-        if isequal(X_temp(i,attribute_set{1,5}), uniqueVals5(obf_i_5,:))
-            X_temp(i,attribute_set{1,5}) = uniqueVals5(obf_j_5,:);
-            count_obf=count_obf+1;
-        end
-    end
-    
-    for i = 1:size(X_temp,1)
-        if isequal(X_temp(i,attribute_set{1,6}), uniqueVals6(obf_i_6,:))
-            X_temp(i,attribute_set{1,6}) = uniqueVals6(obf_j_6,:);
-            count_obf=count_obf+1;
-        end
-    end
-    
+
+    % z = sum of per-set per-record costs evaluated on combined obfuscated data.
+    % Each term uses the same changed_attrs and count denominator as the
+    % corresponding individual xi, so the scales are directly comparable.
     H_obfuscated = calculate_entropy_metrics(X_temp, all_attrs);
-    loss_set_all(sample_id,1) = calculate_entropy_cost(H_clean, H_obfuscated, ...
-        1:size(X,2), all_attrs);
-    loss_set_all(sample_id,1)=6*loss_set_all(sample_id,1)/count_obf;
+    loss_set_all(sample_id,1) = ...
+        calculate_entropy_cost(H_clean, H_obfuscated, attribute_set{1,1}, all_attrs) / count1_comb + ...
+        calculate_entropy_cost(H_clean, H_obfuscated, attribute_set{1,2}, all_attrs) / count2_comb + ...
+        calculate_entropy_cost(H_clean, H_obfuscated, attribute_set{1,3}, all_attrs) / count3_comb + ...
+        calculate_entropy_cost(H_clean, H_obfuscated, attribute_set{1,4}, all_attrs) / count4_comb;
 end
 
 fprintf('\n✓ Sampling complete!\n\n');
@@ -222,10 +208,10 @@ fprintf('Set 3: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
     mean(loss_set3), std(loss_set3), min(loss_set3), max(loss_set3));
 fprintf('Set 4: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
     mean(loss_set4), std(loss_set4), min(loss_set4), max(loss_set4));
-fprintf('Set 5: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
-    mean(loss_set5), std(loss_set5), min(loss_set5), max(loss_set5));
-fprintf('Set 6: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
-    mean(loss_set6), std(loss_set6), min(loss_set6), max(loss_set6));
+% fprintf('Set 5: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
+%     mean(loss_set5), std(loss_set5), min(loss_set5), max(loss_set5));
+% fprintf('Set 6: Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n', ...
+%     mean(loss_set6), std(loss_set6), min(loss_set6), max(loss_set6));
 fprintf('All:   Mean=%.4f, Std=%.4f, Range=[%.4f, %.4f]\n\n', ...
     mean(loss_set_all), std(loss_set_all), min(loss_set_all), max(loss_set_all));
 
@@ -237,14 +223,15 @@ x1 = loss_set1;
 x2 = loss_set2;
 x3 = loss_set3;
 x4 = loss_set4;
-x5 = loss_set5;
-x6 = loss_set6;
+% x5 = loss_set5;
+% x6 = loss_set6;
 z = loss_set_all;
 
 clc; close all;
 
 % -------- 0) Validate and prepare variables --------
-vars = {'z','x1','x2','x3','x4','x5','x6'};
+% vars = {'z','x1','x2','x3','x4','x5','x6'};
+vars = {'z','x1','x2','x3','x4'};
 for k = 1:numel(vars)
     assert(exist(vars{k},'var')==1, sprintf('Variable "%s" does not exist', vars{k}));
     v = eval(vars{k});
@@ -260,8 +247,9 @@ for k = 2:numel(vars)
 end
 
 % -------- 1) Build design matrix --------
-X_reg = [x1 x2 x3 x4 x5 x6];  % N x 6
-varNames = compose('x%d',1:6);
+% X_reg = [x1 x2 x3 x4 x5 x6];  % N x 6
+X_reg = [x1 x2 x3 x4];
+varNames = compose('x%d',1:4);
 T = array2table(X_reg, 'VariableNames', varNames);
 T.z = z;
 
@@ -272,7 +260,8 @@ disp('=== Pearson correlation with z ===');
 disp(corr_tbl);
 
 % -------- 3) Linear model --------
-mdl_lin = fitlm(T, 'z ~ x1 + x2 + x3 + x4 + x5 + x6');
+% mdl_lin = fitlm(T, 'z ~ x1 + x2 + x3 + x4 + x5 + x6');
+mdl_lin = fitlm(T, 'z ~ x1 + x2 + x3 + x4');
 disp('=== Linear Model (main effects) ===');
 disp(mdl_lin);
 fprintf('[Linear] R^2 = %.4f, Adjusted R^2 = %.4f, RMSE = %.4f\n', ...
@@ -282,7 +271,7 @@ fprintf('[Linear] R^2 = %.4f, Adjusted R^2 = %.4f, RMSE = %.4f\n', ...
 coefTable = mdl_lin.Coefficients;
 intercept = coefTable.Estimate(1);
 fprintf('z = %.6g', intercept);
-for i = 1:6
+for i = 1:4
     b = coefTable.Estimate(i+1);
     if b>=0, fprintf(' + %.6g*%s', b, varNames{i});
     else,    fprintf(' - %.6g*%s', -b, varNames{i});
@@ -343,10 +332,10 @@ if numel(ord) >= 2
 end
 
 % -------- 7) VIF (multicollinearity) --------
-VIF = zeros(6,1);
-for j = 1:6
+VIF = zeros(4,1);
+for j = 1:4
     Xj = X_reg(:, j);
-    Xnot = X_reg(:, setdiff(1:6, j));
+    Xnot = X_reg(:, setdiff(1:4, j));
     mdlj = fitlm(Xnot, Xj);
     R2j = mdlj.Rsquared.Ordinary;
     VIF(j) = 1 / max(1 - R2j, eps);
@@ -381,7 +370,7 @@ b = coef.Estimate;
 
 fprintf('--- Linear model: z = b0 + sum(bi*xi) ---\n');
 fprintf('z = %.6g', b(1));
-for i = 1:6
+for i = 1:4
     if b(i+1) >= 0
         fprintf(' + %.6g*x%d', b(i+1), i);
     else
@@ -392,7 +381,7 @@ fprintf('\n');
 
 % LaTeX version
 latex_str = sprintf('z = %.6g', b(1));
-for i = 1:6
+for i = 1:4
     if b(i+1) >= 0
         latex_str = sprintf('%s + %.6g x_%d', latex_str, b(i+1), i);
     else

@@ -26,9 +26,9 @@ OPT_PND;
 %%
 OPT_RMP;
 
-%%
-src = 'result/result-t';
-
-dst = sprintf('result/result-%d', 10);
-
-copyfile(src, dst);
+% %%
+% src = 'result/result-t';
+% 
+% dst = sprintf('result/result-%d', 10);
+% 
+% copyfile(src, dst);

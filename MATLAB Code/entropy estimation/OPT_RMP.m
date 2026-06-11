@@ -1,14 +1,12 @@
-load("result/result-t/cost_attribute.mat")
-load("result/result-t/distance_all_attributes.mat")
-load("result/result-t/epsilon_value.mat")
+load("result/result-1/cost_attribute.mat")
+load("result/result-1/distance_all_attributes.mat")
+load("result/result-1/epsilon_value.mat")
 
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 %%
 epsilon_value=0.01:0.01:10;
@@ -256,76 +254,76 @@ for epsilon_id=1:length(epsilon_allocation_upper)
     loss_set4_OPT_RMP=BR_loss;
     
     
-    % 5
-    epsilon=epsilon_allocat(5);
-    distance_matrix_original=distance_all_attributes{1,5};
-    cost=cost_attribute{1,5};
-    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
-    sum_i=zeros(length(distance_matrix_original),1);
-    for i=1:length(distance_matrix_original)
-        for j=1:length(distance_matrix_original)
-            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
-        end
-        for j=1:length(distance_matrix_original)
-            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
-        end
-    end
-    loss_EM = sum(sum(cost .* P_matrix));
-    obf_loc=1:1:length(distance_matrix_original);
-    P_2=zeros(length(obf_loc),length(distance_matrix_original));
-    for i=1:length(obf_loc)
-        for j=1:length(distance_matrix_original)
-            P_2(i,j)=P_matrix(j,i)/sum(P_matrix(:,i));
-        end
-    end
-    y_k=sparse(length(distance_matrix_original),0);
-    for i=1:length(obf_loc)
-        sum_pc=[];
-        for j=1:length(obf_loc)
-            sum_pc_j=P_2(i,:)*cost(:,j);
-            sum_pc=[sum_pc,sum_pc_j];
-        end
-        [min_sum, y_k(i)] = min(sum_pc);
-    end
-    BR_loss=sum(sum(cost(:,y_k) .* P_matrix));
-    loss_set5_OPT_RMP=BR_loss;
+    % % 5
+    % epsilon=epsilon_allocat(5);
+    % distance_matrix_original=distance_all_attributes{1,5};
+    % cost=cost_attribute{1,5};
+    % P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    % sum_i=zeros(length(distance_matrix_original),1);
+    % for i=1:length(distance_matrix_original)
+    %     for j=1:length(distance_matrix_original)
+    %         sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+    %     end
+    %     for j=1:length(distance_matrix_original)
+    %         P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+    %     end
+    % end
+    % loss_EM = sum(sum(cost .* P_matrix));
+    % obf_loc=1:1:length(distance_matrix_original);
+    % P_2=zeros(length(obf_loc),length(distance_matrix_original));
+    % for i=1:length(obf_loc)
+    %     for j=1:length(distance_matrix_original)
+    %         P_2(i,j)=P_matrix(j,i)/sum(P_matrix(:,i));
+    %     end
+    % end
+    % y_k=sparse(length(distance_matrix_original),0);
+    % for i=1:length(obf_loc)
+    %     sum_pc=[];
+    %     for j=1:length(obf_loc)
+    %         sum_pc_j=P_2(i,:)*cost(:,j);
+    %         sum_pc=[sum_pc,sum_pc_j];
+    %     end
+    %     [min_sum, y_k(i)] = min(sum_pc);
+    % end
+    % BR_loss=sum(sum(cost(:,y_k) .* P_matrix));
+    % loss_set5_OPT_RMP=BR_loss;
+    % 
+    % 
+    % % 6
+    % epsilon=epsilon_allocat(6);
+    % distance_matrix_original=distance_all_attributes{1,6};
+    % cost=cost_attribute{1,6};
+    % P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
+    % sum_i=zeros(length(distance_matrix_original),1);
+    % for i=1:length(distance_matrix_original)
+    %     for j=1:length(distance_matrix_original)
+    %         sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
+    %     end
+    %     for j=1:length(distance_matrix_original)
+    %         P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
+    %     end
+    % end
+    % loss_EM = sum(sum(cost .* P_matrix));
+    % obf_loc=1:1:length(distance_matrix_original);
+    % P_2=zeros(length(obf_loc),length(distance_matrix_original));
+    % for i=1:length(obf_loc)
+    %     for j=1:length(distance_matrix_original)
+    %         P_2(i,j)=P_matrix(j,i)/sum(P_matrix(:,i));
+    %     end
+    % end
+    % y_k=sparse(length(distance_matrix_original),0);
+    % for i=1:length(obf_loc)
+    %     sum_pc=[];
+    %     for j=1:length(obf_loc)
+    %         sum_pc_j=P_2(i,:)*cost(:,j);
+    %         sum_pc=[sum_pc,sum_pc_j];
+    %     end
+    %     [min_sum, y_k(i)] = min(sum_pc);
+    % end
+    % BR_loss=sum(sum(cost(:,y_k) .* P_matrix));
+    % loss_set6_OPT_RMP=BR_loss;
 
-
-    % 6
-    epsilon=epsilon_allocat(6);
-    distance_matrix_original=distance_all_attributes{1,6};
-    cost=cost_attribute{1,6};
-    P_matrix=zeros(length(distance_matrix_original),length(distance_matrix_original));
-    sum_i=zeros(length(distance_matrix_original),1);
-    for i=1:length(distance_matrix_original)
-        for j=1:length(distance_matrix_original)
-            sum_i(i,1)=sum_i(i,1)+exp(-epsilon*distance_matrix_original(i,j)/2.0);
-        end
-        for j=1:length(distance_matrix_original)
-            P_matrix(i,j)=exp(-epsilon*distance_matrix_original(i,j)/2.0)/sum_i(i,1);
-        end
-    end
-    loss_EM = sum(sum(cost .* P_matrix));
-    obf_loc=1:1:length(distance_matrix_original);
-    P_2=zeros(length(obf_loc),length(distance_matrix_original));
-    for i=1:length(obf_loc)
-        for j=1:length(distance_matrix_original)
-            P_2(i,j)=P_matrix(j,i)/sum(P_matrix(:,i));
-        end
-    end
-    y_k=sparse(length(distance_matrix_original),0);
-    for i=1:length(obf_loc)
-        sum_pc=[];
-        for j=1:length(obf_loc)
-            sum_pc_j=P_2(i,:)*cost(:,j);
-            sum_pc=[sum_pc,sum_pc_j];
-        end
-        [min_sum, y_k(i)] = min(sum_pc);
-    end
-    BR_loss=sum(sum(cost(:,y_k) .* P_matrix));
-    loss_set6_OPT_RMP=BR_loss;
-
-    loss_OPT_RMP(epsilon_id,1)=loss_set1_OPT_RMP+loss_set2_OPT_RMP+loss_set3_OPT_RMP+loss_set4_OPT_RMP+loss_set5_OPT_RMP+loss_set6_OPT_RMP;
+    loss_OPT_RMP(epsilon_id,1)=loss_set1_OPT_RMP+loss_set2_OPT_RMP+loss_set3_OPT_RMP+loss_set4_OPT_RMP;
 end
 
-save('result/result-t/loss_OPT_RMP.mat','loss_OPT_RMP');
+save('result/result-1/loss_OPT_RMP.mat','loss_OPT_RMP');

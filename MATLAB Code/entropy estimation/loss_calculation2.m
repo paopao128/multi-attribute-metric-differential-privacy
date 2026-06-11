@@ -1,5 +1,5 @@
-load("result/result-t/cost_attribute.mat")
-load("result/result-t/distance_all_attributes.mat")
+load("result/result-1/cost_attribute.mat")
+load("result/result-1/distance_all_attributes.mat")
 
 
 
@@ -18,7 +18,7 @@ for i=1:length(cost_attribute)
     Srad_val(1,i)=Srad;
 end
  Srad_val
-save('result/result-t/Srad_val.mat','Srad_val');
+save('result/result-1/Srad_val.mat','Srad_val');
 
 %%
 Smse_val=zeros(1,length(cost_attribute));
@@ -37,23 +37,21 @@ for i=1:length(cost_attribute)
     Smse_val(1,i)=Smse;
 end
 Smse_val
-save('result/result-t/Smse_val.mat','Smse_val');
+save('result/result-1/Smse_val.mat','Smse_val');
 %%
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 %% EM,EMBR
 %epsilon_value=[0.02:0.02:1,1.02:0.02:2,2.04:0.04:3,3.05:0.05:4,4.1:0.1:10];
 % epsilon_value=0.04:0.04:10; % 250
 epsilon_value=0.1:0.1:10; % 100
-save('result/result-t/epsilon_value.mat','epsilon_value');
+save('result/result-1/epsilon_value.mat','epsilon_value');
 loss_table=cell(1,length(attribute_set));
-threshold_adj=[0.2, 0.125, 0.02, 0.15, 0.6, 0.25];
+threshold_adj=[1.2, 0.125, 0.02, 0.15];
 for attribute_id=1:1:length(attribute_set)
     loss_table{1,attribute_id}=zeros(3,length(epsilon_value));
     cost=cost_attribute{1,attribute_id};
@@ -101,25 +99,23 @@ for attribute_id=1:1:length(attribute_set)
         end
         
     end
-    save('result/result-t/loss_table.mat','loss_table');
+    save('result/result-1/loss_table.mat','loss_table');
 end
 
 
 %%
 
 
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
-load("result/result-t/Srad_val.mat")
-load("result/result-t/cost_attribute.mat")
-load("result/result-t/distance_all_attributes.mat")
-load("result/result-t/loss_table.mat")
+load("result/result-1/Srad_val.mat")
+load("result/result-1/cost_attribute.mat")
+load("result/result-1/distance_all_attributes.mat")
+load("result/result-1/loss_table.mat")
 method_obfus=[2,2,2,2,2,2];
 %method_obfus=[1,1,1,1,1,1];
 for i=1:length(cost_attribute)
@@ -149,5 +145,5 @@ for i = 1:length(attribute_set)
 end
 
 
-save('result/result-t/loss_eval_upper.mat','loss_eval_upper');
-save('result/result-t/loss_eval_lower.mat','loss_eval_lower');
+save('result/result-1/loss_eval_upper.mat','loss_eval_upper');
+save('result/result-1/loss_eval_lower.mat','loss_eval_lower');

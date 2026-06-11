@@ -155,8 +155,11 @@ else
 end
 
 % Remove rows with missing values (NaN)
+X=[X(:,1:11),X(:,13)];
 valid_rows = ~any(isnan(X), 2) & ~isnan(y);
 X = X(valid_rows, :);
-valid_rows2=randperm(length(X),200);
+X_sample=X(1:500,:);
+X_test=X(501:length(X),:);
+valid_rows2=randperm(length(X_test),200);
 X = X(valid_rows2', :);
 X=zscore(X);

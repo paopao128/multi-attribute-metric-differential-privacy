@@ -1,21 +1,24 @@
-load("result/result-t/cost_attribute.mat")
-load("result/result-t/distance_all_attributes.mat")
-load("result/result-t/loss_eval_lower.mat")
-load("result/result-t/loss_eval_upper.mat")
-load("result/result-t/loss_table.mat")
+load("result/result-1/cost_attribute.mat")
+load("result/result-1/distance_all_attributes.mat")
+load("result/result-1/loss_eval_lower.mat")
+load("result/result-1/loss_eval_upper.mat")
+load("result/result-1/loss_table.mat")
 
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 
 n = length(attribute_set);
 computation_time=zeros(length(1:1:10),1);
-epsilon_i=1:1:10;
+% epsilon_i=1:1:10;
+
+alpha_calibration = 0.1;
+epsilon_total_i = 1:1:10;
+epsilon_i = (1 - alpha_calibration) * epsilon_total_i;
+
 loss_lower=zeros(length(1:1:10),1);
 loss_upper=zeros(length(1:1:10),1);
 
@@ -88,11 +91,11 @@ end
 % fprintf('%.4f %.4f %.4f %.4f \n\n',R.eps_cont');
 % fprintf('lambda* = %.6g\n\n', R.lambda_star);
 % fprintf('sum of utility loss(lower bound) = %.6f\n', R.loss_cont_sum);
-save('result/result-t/computation_time.mat','computation_time');
-save('result/result-t/loss_lower.mat','loss_lower');
-save('result/result-t/loss_upper.mat','loss_upper');
-save('result/result-t/epsilon_allocation_lower.mat','epsilon_allocation_lower');
-save('result/result-t/epsilon_allocation_upper.mat','epsilon_allocation_upper');
+save('result/result-1/computation_time.mat','computation_time');
+save('result/result-1/loss_lower.mat','loss_lower');
+save('result/result-1/loss_upper.mat','loss_upper');
+save('result/result-1/epsilon_allocation_lower.mat','epsilon_allocation_lower');
+save('result/result-1/epsilon_allocation_upper.mat','epsilon_allocation_upper');
 
 
 

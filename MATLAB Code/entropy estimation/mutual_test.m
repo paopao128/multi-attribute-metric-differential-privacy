@@ -1,5 +1,6 @@
-data=X;
-num_attributes=13;
+load_data;
+data=X_sample;
+num_attributes=12;
 num_group=[];
 group_tau=cell(1,100);
 for tau_id=1:1:100

@@ -17,13 +17,11 @@ load_data;
 fprintf('Data shape: %d × %d\n', size(X,1), size(X,2));
 
 %% Define attribute sets
-attribute_set = cell(1,6);
-attribute_set{1,1} = [2,13];
-attribute_set{1,2} = [6];
-attribute_set{1,3} = [7];
-attribute_set{1,4} = [3,9];
-attribute_set{1,5} = [1,4,5,8,10,11];
-attribute_set{1,6} = [12];
+attribute_set = cell(1,4);
+attribute_set{1,1} = [1,3,4,7,8,9,10,11,12];
+attribute_set{1,2} = [2];
+attribute_set{1,3} = [5];
+attribute_set{1,4} = [6];
 
 fprintf('\nAttribute set configuration:\n');
 for i = 1:length(attribute_set)
@@ -129,21 +127,21 @@ if ~exist('result/entropy-based', 'dir')
     mkdir('result/entropy-based');
 end
 
-save('result/result-t/X.mat', 'X');
-save('result/result-t/cost_attribute.mat', 'cost_attribute');
-save('result/result-t/H_clean.mat', 'H_clean');
-save('result/result-t/attribute_set.mat', 'attribute_set');
+save('result/result-2/X.mat', 'X');
+save('result/result-2/cost_attribute.mat', 'cost_attribute');
+save('result/result-2/H_clean.mat', 'H_clean');
+save('result/result-2/attribute_set.mat', 'attribute_set');
 
 fprintf('\n=== Cost Matrix Calculation Complete ===\n');
 fprintf('Results saved to result/entropy-based/\n');
 %%
 
 cost_attribute_ori=cost_attribute;
-save('result/result-t/cost_attribute_ori.mat','cost_attribute_ori');
+save('result/result-2/cost_attribute_ori.mat','cost_attribute_ori');
 for attribute_id=1:length(cost_attribute)
     cost_attribute{1,attribute_id}=10*cost_attribute{1,attribute_id}/length(cost_attribute{1,attribute_id});
 end
-save('result/result-t/cost_attribute.mat','cost_attribute');
+save('result/result-2/cost_attribute.mat','cost_attribute');
 %% Display summary statistics
 fprintf('\n=== Summary Statistics ===\n');
 for i = 1:length(cost_attribute)

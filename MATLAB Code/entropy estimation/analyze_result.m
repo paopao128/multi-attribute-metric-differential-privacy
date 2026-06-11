@@ -1,7 +1,7 @@
-base_dir = 'result';   % 例如 './results'
-loss_real_all=zeros(3,10);
+base_dir = 'result'; 
+loss_real_all=zeros(2,10);
 sample_start=1;
-sample_end=10;
+sample_end=2;
 %% SPL_DPN
 for i = sample_start:sample_end
     folder_name = sprintf('result-%d', i);
@@ -15,7 +15,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% SPL_RMP
@@ -31,7 +31,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% ALL_DPN
@@ -47,7 +47,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% ALL_RMP
@@ -63,7 +63,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% m
@@ -79,7 +79,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% r
@@ -95,7 +95,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% bound-m
@@ -111,7 +111,7 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
 %% bound-r
@@ -127,6 +127,6 @@ for epsilon_id=1:10
     loss_epsilon_i=loss_real_all(:,epsilon_id);
     mean_loss=mean(loss_epsilon_i);
     std_loss=std(loss_epsilon_i);
-    fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
+    fprintf('%.2f ± %.1f & ',mean_loss,std_loss);
 end
 fprintf('\n');
