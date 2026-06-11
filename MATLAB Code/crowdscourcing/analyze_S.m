@@ -1,4 +1,5 @@
-base_dir = 'result';   % 例如 './results'
+script_dir = fileparts(mfilename('fullpath'));
+base_dir = fullfile(script_dir, 'result');
 loss_real_all=zeros(10,10);
 Srad_in=[];
 Smse_in=[];
@@ -36,6 +37,6 @@ end
 %     std_loss=std(loss_epsilon_i);
 %     fprintf('%.2f ± %.2f & ',mean_loss,std_loss);
 % end
-save('result\domain_size.mat','domain_size');
-save('result\Srad_in.mat','Srad_in');
-save('result\Smse_in.mat','Smse_in');
+save(fullfile(base_dir, 'domain_size.mat'), 'domain_size');
+save(fullfile(base_dir, 'Srad_in.mat'), 'Srad_in');
+save(fullfile(base_dir, 'Smse_in.mat'), 'Smse_in');

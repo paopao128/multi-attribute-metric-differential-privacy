@@ -2,6 +2,11 @@
 % Global utility u for frequency estimation on NUMERICAL matrix X
 % Enhanced with cost matrix calculation for each attribute set
 clear; clc;
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-1');
+if ~isfolder(result_dir)
+    mkdir(result_dir);
+end
 
 %% ========== CONFIGURATION ==========
 % Set the number of samples to use (for faster computation)
@@ -15,10 +20,11 @@ colNames = { ...
     'capital_gain','capital_loss','hours_per_week', ...
     'native_country','income'};
 
-opts = detectImportOptions('adult.data','FileType','text','Delimiter',',');
+data_file = fullfile(script_dir, 'adult.data');
+opts = detectImportOptions(data_file,'FileType','text','Delimiter',',');
 opts.VariableNames = colNames;
 opts = setvaropts(opts, colNames, 'TreatAsMissing', '?');
-T = readtable('adult.data', opts);
+T = readtable(data_file, opts);
 T = rmmissing(T);
 fprintf('Loaded %d samples from full dataset\n', height(T));
 
@@ -137,12 +143,12 @@ X = X_ori;
 
 %% Save results
 fprintf('Saving results...\n');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\data.mat', 'X');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\cost_attribute.mat', 'cost_attribute');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\u_clean.mat', 'u_clean');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\attribute_set.mat', 'attribute_set');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\ref.mat', 'ref');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\Frequency Estimation\result\result-1\attr_cols.mat', 'attr_cols');
+save(fullfile(result_dir, 'data.mat'), 'X');
+save(fullfile(result_dir, 'cost_attribute.mat'), 'cost_attribute');
+save(fullfile(result_dir, 'u_clean.mat'), 'u_clean');
+save(fullfile(result_dir, 'attribute_set.mat'), 'attribute_set');
+save(fullfile(result_dir, 'ref.mat'), 'ref');
+save(fullfile(result_dir, 'attr_cols.mat'), 'attr_cols');
 
 fprintf('\n=== Cost Matrix Calculation Complete ===\n');
 fprintf('Results saved to:\n');

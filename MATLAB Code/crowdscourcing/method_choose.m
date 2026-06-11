@@ -1,5 +1,8 @@
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-2\cost_attribute.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-2\distance_all_attributes.mat")
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-2');
+
+load(fullfile(result_dir, 'cost_attribute.mat'))
+load(fullfile(result_dir, 'distance_all_attributes.mat'))
 threshold_adj=[1, 0.125, 0.15, 0.15];
 
 num_sample=100;

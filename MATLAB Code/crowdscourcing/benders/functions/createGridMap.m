@@ -1,4 +1,6 @@
 function [adjacence_matrix, distance_matrix, coord, distance_graph, env_parameters] = createGridMap(env_parameters)
+    function_dir = fileparts(mfilename('fullpath'));
+    grid_file = fullfile(function_dir, '..', 'Dataset', 'grid_map', 'london_cell_node.csv');
     %% coord: all points
     % cell_size = 1.5; 
     % for i = 1:1:30
@@ -9,9 +11,9 @@ function [adjacence_matrix, distance_matrix, coord, distance_graph, env_paramete
     %     end
     % end
     %%
-    opts = detectImportOptions('.\Dataset\grid_map\london_cell_node.csv');
+    opts = detectImportOptions(grid_file);
     opts = setvaropts(opts, {'y', 'x'}, 'Type', 'double'); 
-    tbl = readtable('.\Dataset\grid_map\london_cell_node.csv', opts);
+    tbl = readtable(grid_file, opts);
     grid_index = tbl.grid_index;
     coord(:, 1) = tbl.x;  
     coord(:, 2) = tbl.y;  

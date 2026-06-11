@@ -1,7 +1,10 @@
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\epsilon_allocation_lower.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\epsilon_allocation_upper.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\distance_all_attributes.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\cost_attribute.mat")
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-1');
+
+load(fullfile(result_dir, 'epsilon_allocation_lower.mat'))
+load(fullfile(result_dir, 'epsilon_allocation_upper.mat'))
+load(fullfile(result_dir, 'distance_all_attributes.mat'))
+load(fullfile(result_dir, 'cost_attribute.mat'))
 
 %% use epsilon_allocation upper
 loss_real=zeros(length(epsilon_allocation_upper),1);

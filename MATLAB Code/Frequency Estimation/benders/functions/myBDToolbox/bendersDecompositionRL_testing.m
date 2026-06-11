@@ -1,17 +1,19 @@
 function [masteragent, agent, lowerbound, upperbound] = bendersDecompositionRL_testing(env_parameters, masteragent, ITER)
+    toolbox_dir = fileparts(mfilename('fullpath'));
+    dataset_dir = fullfile(toolbox_dir, '..', '..', 'Dataset', 'rome', 'intermediate');
 
-    load('.\Dataset\rome\intermediate\obf_loc.mat'); 
-    load('.\Dataset\rome\intermediate\node_in_target.mat'); 
-    load('.\Dataset\rome\intermediate\masteragent.mat'); 
-    load('.\Dataset\rome\intermediate\node_boundary.mat'); 
-    load('.\Dataset\rome\intermediate\G.mat'); 
+    load(fullfile(dataset_dir, 'obf_loc.mat'));
+    load(fullfile(dataset_dir, 'node_in_target.mat'));
+    load(fullfile(dataset_dir, 'masteragent.mat'));
+    load(fullfile(dataset_dir, 'node_boundary.mat'));
+    load(fullfile(dataset_dir, 'G.mat'));
 
     nr_extremepoints = zeros(env_parameters.NR_AGENT, 100);
     % load('.\Dataset\rome\intermediate\agent_extreme.mat');
-    load('.\Dataset\rome\intermediate\agent_extreme1.mat');
-    load('.\Dataset\rome\intermediate\nr_extremepoints.mat');
+    load(fullfile(dataset_dir, 'agent_extreme1.mat'));
+    load(fullfile(dataset_dir, 'nr_extremepoints.mat'));
     % load('.\Dataset\rome\intermediate\agentAward.mat'); 
-    load('.\Dataset\rome\intermediate\agentAward1.mat'); 
+    load(fullfile(dataset_dir, 'agentAward1.mat'));
 
     masteragent.cuts_A = [];
     masteragent.cuts_b = [];
@@ -23,7 +25,7 @@ function [masteragent, agent, lowerbound, upperbound] = bendersDecompositionRL_t
     for task_loc = 1:1:1
         clear cost_matrix; 
         % load('.\Dataset\rome\intermediate\agent_extreme.mat');
-        load('.\Dataset\rome\intermediate\agent_extreme1.mat');
+        load(fullfile(dataset_dir, 'agent_extreme1.mat'));
         for i = 1:1:env_parameters.NR_AGENT
             agent(i).isunbounded = 0; 
         end

@@ -1,9 +1,12 @@
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\cost_attribute.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\data.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\distance_all_attributes.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\overall_accuracy_final_ori.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\overall_accuracy_ori.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\quality.mat")
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-3');
+
+load(fullfile(result_dir, 'cost_attribute.mat'))
+load(fullfile(result_dir, 'data.mat'))
+load(fullfile(result_dir, 'distance_all_attributes.mat'))
+load(fullfile(result_dir, 'overall_accuracy_final_ori.mat'))
+load(fullfile(result_dir, 'overall_accuracy_ori.mat'))
+load(fullfile(result_dir, 'quality.mat'))
 
 
 %%
@@ -65,7 +68,7 @@ for attribute_id=1:1:length(attribute_set)
     loss_table{1,attribute_id}(3,:)=cal_loss_benders(epsilon_value,distance_matrix_original,cost,threshold_adj(attribute_id));
     
 end
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\loss_table.mat','loss_table');
+save(fullfile(result_dir, 'loss_table.mat'), 'loss_table');
 
 %% Srad
 for i=1:length(cost_attribute)
@@ -134,5 +137,5 @@ end
 %     loss_test(3,id_eps)=loss_eval_lower{1}(epsilon_test);
 % end
 
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\loss_eval_upper.mat','loss_eval_upper');
-save('C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-3\loss_eval_lower.mat','loss_eval_lower');
+save(fullfile(result_dir, 'loss_eval_upper.mat'), 'loss_eval_upper');
+save(fullfile(result_dir, 'loss_eval_lower.mat'), 'loss_eval_lower');

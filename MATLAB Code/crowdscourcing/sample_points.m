@@ -1,6 +1,10 @@
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\overall_accuracy_final_ori.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\overall_accuracy_ori.mat")
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-1');
+data_file = fullfile(result_dir, 'data.mat');
+
+load(data_file)
+load(fullfile(result_dir, 'overall_accuracy_final_ori.mat'))
+load(fullfile(result_dir, 'overall_accuracy_ori.mat'))
 
 
 attribute_set=cell(1,4);
@@ -24,7 +28,7 @@ loss_set_all=zeros(num_sample,1);
 
 for sample_id=1:num_sample
     % set1
-    load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat");
+    load(data_file);
     obf_i_1=randi(length(uniqueVals1));
     obf_j_1=randi(length(uniqueVals1));
     for i=1:length(data)
@@ -65,7 +69,7 @@ for sample_id=1:num_sample
     loss_set1(sample_id,1)=(overall_accuracy_ori-overall_accuracy)/overall_accuracy_ori*100000;
 
     % set2
-    load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat");
+    load(data_file);
     obf_i_2=randi(length(uniqueVals2));
     obf_j_2=randi(length(uniqueVals2));
     for i=1:length(data)
@@ -105,7 +109,7 @@ for sample_id=1:num_sample
     loss_set2(sample_id,1)=(overall_accuracy_ori-overall_accuracy)/overall_accuracy_ori*100000;
 
     % set3
-    load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat");
+    load(data_file);
     obf_i_3=randi(length(uniqueVals3));
     obf_j_3=randi(length(uniqueVals3));
     for i=1:length(data)
@@ -143,7 +147,7 @@ for sample_id=1:num_sample
     loss_set3(sample_id,1)=(overall_accuracy_ori-overall_accuracy)/overall_accuracy_ori*100000;
 
     % set4
-    load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat");
+    load(data_file);
     obf_i_4=randi(length(uniqueVals4));
     obf_j_4=randi(length(uniqueVals4));
     for i=1:length(data)
@@ -183,7 +187,7 @@ for sample_id=1:num_sample
     
 
     % all
-    load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result\result-1\data.mat");
+    load(data_file);
 
     for i=1:length(data)
         if isequal(data(i,attribute_set{1,1}), uniqueVals1(obf_i_1,:))

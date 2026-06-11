@@ -2,15 +2,17 @@ function [masteragent, agent, lowerbound, upperbound] = bendersDecompositionRL_t
                                                                             %masteragent, agent, node_boundary, ...
                                                                             % node_in_target, obf_loc, ...
     %% This function is used to train the RL policy
+    toolbox_dir = fileparts(mfilename('fullpath'));
+    dataset_dir = fullfile(toolbox_dir, '..', '..', 'Dataset', 'rome', 'intermediate');
 
-    load('.\Dataset\rome\intermediate\obf_loc.mat'); 
+    load(fullfile(dataset_dir, 'obf_loc.mat'));
     % load('.\Dataset\rome\intermediate\node_in_target.mat'); 
     % load('.\Dataset\rome\intermediate\masteragent.mat'); 
     % load('.\Dataset\rome\intermediate\node_boundary.mat'); 
-    load('.\Dataset\rome\intermediate\G.mat'); 
+    load(fullfile(dataset_dir, 'G.mat'));
 
 %     nr_extremepoints = zeros(env_parameters.NR_AGENT, 100);
-    load('.\Dataset\rome\intermediate\agent_extreme1.mat');
+    load(fullfile(dataset_dir, 'agent_extreme1.mat'));
 %     load('.\Dataset\rome\intermediate\nr_extremepoints.mat');
 
     masteragent.cuts_A = [];
@@ -26,7 +28,7 @@ function [masteragent, agent, lowerbound, upperbound] = bendersDecompositionRL_t
         task_loc = 1; 
         % clear cost_matrix; 
         % load('.\Dataset\rome\intermediate\agent_extreme.mat');
-        load('.\Dataset\rome\intermediate\agent_extreme1.mat');
+        load(fullfile(dataset_dir, 'agent_extreme1.mat'));
         for i = 1:1:env_parameters.NR_AGENT
             episode(ep_idx, i) = struct(  'states', zeros(ITER, size(agent(i).extremerays, 2)), ...
                                           'isdone', zeros(ITER, 1), ...

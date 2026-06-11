@@ -1,10 +1,13 @@
-addpath('./benders/functions/');                                                    
-addpath('./benders/Dataset/'); 
-addpath('./benders/functions/myBDToolbox');                                         
-addpath('./benders/functions/myPlotToolbox');                                       
-addpath('./benders/functions/haversine'); 
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\cost_attribute.mat")
-load("C:\Users\lry1t\Dropbox\Ruiyao Liu\multi_attribute_mDP\crowdsourcing\result-1\distance_all_attributes.mat")
+script_dir = fileparts(mfilename('fullpath'));
+result_dir = fullfile(script_dir, 'result', 'result-1');
+
+addpath(fullfile(script_dir, 'benders', 'functions'));
+addpath(fullfile(script_dir, 'benders', 'Dataset'));
+addpath(fullfile(script_dir, 'benders', 'functions', 'myBDToolbox'));
+addpath(fullfile(script_dir, 'benders', 'functions', 'myPlotToolbox'));
+addpath(fullfile(script_dir, 'benders', 'functions', 'haversine'));
+load(fullfile(result_dir, 'cost_attribute.mat'))
+load(fullfile(result_dir, 'distance_all_attributes.mat'))
 parameters;
 distance_matrix=distance_all_attributes{1,1};
 env_parameters.cost_matrix=cost_attribute{1,1};
