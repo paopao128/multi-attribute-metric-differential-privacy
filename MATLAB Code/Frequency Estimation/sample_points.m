@@ -1,12 +1,8 @@
-script_dir = fileparts(mfilename('fullpath'));
-result_dir = fullfile(script_dir, 'result', 'result-1');
-data_file = fullfile(result_dir, 'data.mat');
-
-load(fullfile(result_dir, 'cost_attribute.mat'))
-load(data_file)
-load(fullfile(result_dir, 'ref.mat'))
-load(fullfile(result_dir, 'u_clean.mat'))
-load(fullfile(result_dir, 'attr_cols.mat'))
+load("result/result-1/cost_attribute.mat")
+load("result/result-1/data.mat")
+load("result/result-1/ref.mat")
+load("result/result-1/u_clean.mat")
+load("result/result-1/attr_cols.mat")
 data=X;
 
 attribute_set=cell(1,6);
@@ -36,7 +32,7 @@ loss_set_all=zeros(num_sample,1);
 
 for sample_id=1:num_sample
     % set1
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_1=randi(length(uniqueVals1));
     obf_j_1=randi(length(uniqueVals1));
@@ -51,7 +47,7 @@ for sample_id=1:num_sample
     loss_set1(sample_id,1)=(u_clean - u_obfuscated) * 100000;
 
     % set2
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_2=randi(length(uniqueVals2));
     obf_j_2=randi(length(uniqueVals2));
@@ -65,7 +61,7 @@ for sample_id=1:num_sample
     loss_set2(sample_id,1)=(u_clean - u_obfuscated) * 100000;
 
     % set3
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_3=randi(length(uniqueVals3));
     obf_j_3=randi(length(uniqueVals3));
@@ -79,7 +75,7 @@ for sample_id=1:num_sample
     loss_set3(sample_id,1)=(u_clean - u_obfuscated) * 100000;
 
     % set4
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_4=randi(length(uniqueVals4));
     obf_j_4=randi(length(uniqueVals4));
@@ -92,7 +88,7 @@ for sample_id=1:num_sample
     loss_set4(sample_id,1)=(u_clean - u_obfuscated) * 100000;
 
     % set5
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_5=randi(length(uniqueVals5));
     obf_j_5=randi(length(uniqueVals5));
@@ -105,7 +101,7 @@ for sample_id=1:num_sample
     loss_set5(sample_id,1)=(u_clean - u_obfuscated) * 100000;
 
     % set6
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
     obf_i_6=randi(length(uniqueVals6));
     obf_j_6=randi(length(uniqueVals6));
@@ -119,7 +115,7 @@ for sample_id=1:num_sample
     
 
     % all
-    load(data_file);
+    load("result/result-1/data.mat");
     data=X;
 
     for i=1:length(data)

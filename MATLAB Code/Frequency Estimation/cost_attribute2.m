@@ -2,10 +2,8 @@
 % Global utility u for frequency estimation on NUMERICAL matrix X
 % Enhanced with cost matrix calculation for each attribute set
 clear; clc;
-script_dir = fileparts(mfilename('fullpath'));
-result_dir = fullfile(script_dir, 'result', 'result-1');
-if ~isfolder(result_dir)
-    mkdir(result_dir);
+if ~isfolder("result/result-1")
+    mkdir("result/result-1");
 end
 
 %% ========== CONFIGURATION ==========
@@ -20,11 +18,10 @@ colNames = { ...
     'capital_gain','capital_loss','hours_per_week', ...
     'native_country','income'};
 
-data_file = fullfile(script_dir, 'adult.data');
-opts = detectImportOptions(data_file,'FileType','text','Delimiter',',');
+opts = detectImportOptions('adult.data','FileType','text','Delimiter',',');
 opts.VariableNames = colNames;
 opts = setvaropts(opts, colNames, 'TreatAsMissing', '?');
-T = readtable(data_file, opts);
+T = readtable('adult.data', opts);
 T = rmmissing(T);
 fprintf('Loaded %d samples from full dataset\n', height(T));
 
@@ -143,12 +140,12 @@ X = X_ori;
 
 %% Save results
 fprintf('Saving results...\n');
-save(fullfile(result_dir, 'data.mat'), 'X');
-save(fullfile(result_dir, 'cost_attribute.mat'), 'cost_attribute');
-save(fullfile(result_dir, 'u_clean.mat'), 'u_clean');
-save(fullfile(result_dir, 'attribute_set.mat'), 'attribute_set');
-save(fullfile(result_dir, 'ref.mat'), 'ref');
-save(fullfile(result_dir, 'attr_cols.mat'), 'attr_cols');
+save('result/result-1/data.mat', 'X');
+save('result/result-1/cost_attribute.mat', 'cost_attribute');
+save('result/result-1/u_clean.mat', 'u_clean');
+save('result/result-1/attribute_set.mat', 'attribute_set');
+save('result/result-1/ref.mat', 'ref');
+save('result/result-1/attr_cols.mat', 'attr_cols');
 
 fprintf('\n=== Cost Matrix Calculation Complete ===\n');
 fprintf('Results saved to:\n');
